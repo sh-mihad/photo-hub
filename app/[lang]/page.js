@@ -1,10 +1,12 @@
-import { getDictionary } from "./dictionaries";
+import PhotoList from "@/components/PhotoList";
 
 
 export default async function Home({params:{lang}}) {
-  const locales = await getDictionary(lang)
-  console.log("locales",locales);
+  const response = await fetch(`${process.env.BASE_URL}/photos`)
+  const photos = await response.json()
   return (
-   <div>{locales.save}</div>
+   <>
+    <PhotoList photos={photos}/>
+   </>
   );
 }
